@@ -9,9 +9,11 @@ Fully configurable, you can add as many commands as you want, change all the plu
 
 
 <b>Dependencies:</b>
-Votifier/NuVotifier
+<br />
+<b>Votifier/NuVotifier</b>
 I recomend to install the latest NuVotifier version from here: https://www.spigotmc.org/resources/nuvotifier.13449/
-PlaceHolderAPI
+<br />
+<b>PlaceHolderAPI<b>
 Latest version from spigot: https://www.spigotmc.org/resources/placeholderapi.6245/
 Only if you want to use the placeholders to show the number of votes in a scoreboard or just to make a leaderboard using leaderheads.
 
