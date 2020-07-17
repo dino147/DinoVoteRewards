@@ -29,13 +29,13 @@ If you don't install Votifier or NuVotifier, the plugin won't work !
 <p>/dinovote reload - Reloads the plugin config, you can use this after you change the messages for example.</p>
 
 <b><u>Permissions:<u></b>
-dinovote.votereward - permission to use /votereward
-dinovote.version - permission to use /dinovote version
-dinovote.reload - permission to use /dinovote reload (to reload the config).
-dinovote.vip - default permission to receive vip rewards (you can change vip to whatever you want in the config file).
-dinovote.mvp - default permission to receive mvp rewards (you can change vip to whatever you want in the config file).
-dinovote.noremind - if you have remindmessages enabled in the config.yml, players with this permission will not receive vote reminders
+<p>dinovote.votereward - permission to use /votereward</p>
+<p>dinovote.version - permission to use /dinovote version</p>
+<p>dinovote.reload - permission to use /dinovote reload (to reload the config).</p>
+<p>dinovote.vip - default permission to receive vip rewards (you can change vip to whatever you want in the config file).</p>
+<p>dinovote.mvp - default permission to receive mvp rewards (you can change vip to whatever you want in the config file).</p>
+<p>dinovote.noremind - if you have remindmessages enabled in the config.yml, players with this permission will not receive vote reminders</p>
 
 <b><u>PlaceHolders:<u><b>
-%dinovoterewards_votes% - displays the number of votes a player has
-(You need to have placeholderapi to use placeholders)
+<p>%dinovoterewards_votes% - displays the number of votes a player has
+(You need to have placeholderapi to use placeholders)</p>
