@@ -1,0 +1,121 @@
+Settings:
+  #If this is set to true, the players will receive a message defined in the Messages section
+  PlayerJoinMessage: true
+  #If this is set to true, we will send a broadcast message defined in the Messages section each time someone votes
+  BroadCastVotes: true
+  #If this is set to true, you enable the cumulative section bellow
+  Cumulative: false
+  #If this is set to true, you enable the permission rewards bellow
+  PermVote: false
+  #If this is set to true you enable the global commands bellow
+  GlobalCmds: false
+  #If this is set to true players will receive remind messages to vote
+  RemindMessage: false
+  #Time in seconds between reminds (reminds are sent only if the player didn't vote in the last 24 hours)
+  RemindTime: 300
+MySQL:
+  enable: false
+  ServerName: 'survival'
+  host: 'localhost'
+  port: 3306
+  username: 'root'
+  password: 'password'
+  database: 'dinovote'
+  table: 'dvote'
+#Commands to send when someone votes the server
+Commands:
+  - 'give %player% diamond 3'
+  - 'give %player% iron_ingot 16'
+Cumulative:
+  #At 5 votes, we will run the command bellow (you can set multiple commands, just like in the commands section)
+  '5':
+    commands:
+      - 'give %player% gold_ingot 1'
+    message:
+      - 'Thanks for voting the server for 5 times !'
+  #At 10 votes, we will run the command bellow (you can set multiple commands, just like in the commands section)
+  '10':
+    commands:
+      - 'give %player% emerald 1'
+    message:
+      - 'Thanks for voting the server for 10 times !'
+
+PermVote:
+  #If the player has the permission dinovote.vip, he will receive the reward bellow
+  'vip':
+    - 'give %player% diamond 10'
+  #If the player has the permission dinovote.mvp, he will receive the reward bellow
+  'mvp':
+    - 'give %player% diamond 16'
+
+#The commands bellow will be executed only once on the first server the player enters (usefull if you want
+#to give players a global curency). You need to have MySQL enabled for this to work
+#These are executed only on the server where the player is online
+GlobalCmds:
+  - 'tokens give %player% 10'
+
+Messages:
+  #The message shown when someone types /vote
+  votemessage:
+    - '&6-----------------------------------'
+    - ''
+    - '&6You curently have %votes% votes'
+    - 'You can vote the server to get good rewards'
+    - ''
+    - 'LINK: &6https://minecraft-mp.com'
+    - ''
+    - '&6-----------------------------------'
+
+  #The message sent to the player when he/she joins the server (you can disable this in settings section)
+  JoinMessage:
+    - '&6---------------------------------'
+    - ''
+    - '&eVote our server to get some nice rewards'
+    - 'Use /vote to get the vote link'
+    - ''
+    - '&6---------------------------------'
+
+  #The message broadcasted to the server when someone votes (you can disable this in the settings section)
+  broadcastmessage:
+    - '&e%player% &fhas voted the server and received his rewards.'
+    - ''
+    - '&6Type /vote &fto get the vote link if you also want to vote'
+  #The message bellow is sent to the player when he/she votes
+  playermessage:
+    - '-----------------------------------'
+    - ''
+    - '&fThanks for voting the server! '
+    - '&eYou curently have %votes% votes !'
+    - ''
+    - '-----------------------------------'
+  #The message sent to the player when he/she types /voterewards
+  voterewardmsg:
+    - '-----------------------------------'
+    - ''
+    - '&fYou can receive the following rewards if you vote the server: '
+    - '&e5 x Diamond, 16 x iron ingot'
+    - ''
+    - '-----------------------------------'
+  #Remind Message are sent only if the player didn't vote in the last 24 hours
+  RemindMessage:
+    - '-----------------------------------'
+    - ''
+    - 'Remember to vote the server ! Type /vote to get the vote link'
+    - ''
+    - '-----------------------------------'
+  #The message sent when someone types /votes to check his number of votes
+  VotesCommand:
+    - '-----------------------------------'
+    - ''
+    - '&eYou curently have %votes% votes'
+    - ''
+    - '-----------------------------------'
+  #The message sent when someone types /votes %player% to check a player number of votes
+  VotesCommandOther:
+    - '-----------------------------------'
+    - ''
+    - '&fPlayer %player% has %votes% votes'
+    - ''
+    - '-----------------------------------'
+
+

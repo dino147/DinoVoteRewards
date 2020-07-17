@@ -1,0 +1,27 @@
+name: DinoVoteRewards
+version: ${project.version}
+main: me.dinovote.dinovote.DinoVoteRewards
+authors: [dino14]
+depends: [Votifier]
+softdepend: [PlaceholderAPI]
+description: Vote reward plugin
+commands:
+  vote:
+    description: The vote command
+    usage: /<command>
+  votereward:
+    description: The command to see the vote rewards
+    usage: /<command>
+  votes:
+    description: The vote command
+    usage: /<command>
+  dinovote:
+    description: The plugin basic command
+    aliases: [dvote,dinovoterewards]
+permissions:
+  dinovote.reload:
+    description: Permission to reload the plugin
+  dinovote.votereward:
+    description: Permission for the /votereward comaand
+  dinovote.version:
+    description: Permission to use /dinovote version
