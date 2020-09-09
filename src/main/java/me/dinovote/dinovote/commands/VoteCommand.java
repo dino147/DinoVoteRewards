@@ -34,7 +34,7 @@ public class VoteCommand implements CommandExecutor {
 
             //acum trimitem mesajul multiplu cu un for, lista List<String>
             for(int i = 0; i < msgmare.size(); i++){
-                String msgcolor = (ChatColor.translateAlternateColorCodes('&', msgmare.get(i).replace("%votes%", Integer.toString(votes))));
+                String msgcolor = (ChatColor.translateAlternateColorCodes('&', msgmare.get(i).replace("%votes%", Integer.toString(votes)).replace("%player%", player.getName())));
                 player.sendMessage(msgcolor);
             }
             //     player.setHealth(0);
