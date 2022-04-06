@@ -12,13 +12,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -27,6 +23,8 @@ public final class DinoVoteRewards extends JavaPlugin implements Listener {
 
     //public ArrayList<Jucator> jucatori = new ArrayList<Jucator>();
     public HashMap<String, Jucator>  jucatori = new HashMap<String, Jucator>();
+    public int vpVotes;
+    public int vpVotesRequired;
 
     public MySQL sql;
     public SQLUtils data;
@@ -48,6 +46,8 @@ public final class DinoVoteRewards extends JavaPlugin implements Listener {
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
+        vpVotesRequired = getConfig().getInt("VoteParty.votesRequired");
+
 
         //setari pentru baza de date mysql
         if(getConfig().getBoolean("MySQL.enable")) {
@@ -58,27 +58,33 @@ public final class DinoVoteRewards extends JavaPlugin implements Listener {
                 sql.connect();
             } catch (ClassNotFoundException | SQLException e) {
                 //e.printStackTrace();
-                Bukkit.getLogger().info("Database not connected");
+                getLogger().info("Database not connected");
             } //throwables.printStackTrace();
 
 
             if (sql.isConnected()) {
-                Bukkit.getLogger().info("Database is connected");
+                getLogger().info("Database is connected");
                 data.createTable();
+                data.createTableSettings();
                 String server = getConfig().getString("MySQL.ServerName");
                 data.createColumn(server);
                 if(getConfig().getBoolean("Settings.RemindMessage")){
                     data.createColumn("lastvoted");
                 }
+                data.createSetting("VotePartyVotes");
                 data.loadVotes();
+                //noVotes = data.getSetting("TotalVotes");
+
             }
         }
         else {
             //generare votes.yml
             FileStorage.setup();
-            FileStorage.getFile().options().copyDefaults(true);
-            FileStorage.saveFile();
+            FileStorage.getFile1().options().copyDefaults(true);
+            FileStorage.getFile2().options().copyDefaults(true);
+            FileStorage.saveFiles();
             this.getPlayers();
+            this.getVotes();
         }
 
         if (getConfig().getBoolean("Settings.RemindMessage")) {
@@ -114,38 +120,47 @@ public final class DinoVoteRewards extends JavaPlugin implements Listener {
             sql.disconnect();
         }
         else {
-            FileStorage.saveFile();
+            FileStorage.saveFiles();
         }
 
     }
 
 
     public void getPlayers(){
-        for (String key : FileStorage.getFile().getKeys(false)) {
+        for (String key : FileStorage.getFile1().getKeys(false)) {
             //deep false inseamna ca nu vrem sectiunile inferioare din config (adica in cazul asta x,y,z)
-            if (FileStorage.getFile().isConfigurationSection(key)) {
+            if (FileStorage.getFile1().isConfigurationSection(key)) {
                // jucatori.add(new Jucator());
                 jucatori.put(key, new Jucator());
                 //String nume = key;
                 int votes = 0;
                 int offlinevotes = 0;
                 long lastvoted = 0;
-                for(String str : FileStorage.getFile().getConfigurationSection(key).getKeys(false)){
+                for(String str : FileStorage.getFile1().getConfigurationSection(key).getKeys(false)){
                     if(str.contains("votes")){
-                        votes = FileStorage.getFile().getInt(key + ".votes" );
+                        votes = FileStorage.getFile1().getInt(key + ".votes" );
                         //System.out.println("Jucatorul are " + votes);
                     }
                     if(str.contains("offlinevotes")){
-                        offlinevotes = FileStorage.getFile().getInt(key + ".offlinevotes" );
+                        offlinevotes = FileStorage.getFile1().getInt(key + ".offlinevotes" );
                         //System.out.println("Jucatorul are " + votes + "voturi offline");
                     }
                     if(str.contains("lastvoted")){
-                        lastvoted = FileStorage.getFile().getLong(key + ".lastvoted");
+                        lastvoted = FileStorage.getFile1().getLong(key + ".lastvoted");
                     }
                 }
                 //jucatori.get(jucatori.size() - 1).setData(key,votes,offlinevotes);
                 jucatori.get(key).setData(key,votes,offlinevotes,lastvoted);
             }
+        }
+    }
+
+    public void getVotes() {
+        if(FileStorage.getFile2().isConfigurationSection("VoteParty")) {
+            this.vpVotes = FileStorage.getFile2().getInt("VoteParty.votes");
+        } else {
+            FileStorage.getFile2().set("VoteParty.votes", this.vpVotes);
+            FileStorage.saveFiles();
         }
     }
 

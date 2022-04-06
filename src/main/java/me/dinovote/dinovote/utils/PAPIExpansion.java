@@ -60,6 +60,19 @@ public class PAPIExpansion extends PlaceholderExpansion {
             return "0";
         }
 
+        // %dinovoterewards_vp_votes%
+        if(identifier.equals("vp_votes")){
+            if(plugin.vpVotes != 0) {
+                return Integer.toString(plugin.vpVotes);
+            }
+            return "0";
+        }
+
+        // %dinovoterewards_vp_votes_required%
+        if(identifier.equals("vp_votes_required")){
+            return Integer.toString(plugin.vpVotesRequired);
+        }
+
         //daca este alt placeholder, returnam null
         return null;
     }

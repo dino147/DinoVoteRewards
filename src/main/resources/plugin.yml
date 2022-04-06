@@ -3,6 +3,7 @@ version: ${project.version}
 main: me.dinovote.dinovote.DinoVoteRewards
 authors: [dino14]
 depends: [Votifier]
+depend: [Votifier]
 softdepend: [PlaceholderAPI]
 description: Vote reward plugin
 commands:

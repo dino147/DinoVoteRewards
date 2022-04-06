@@ -22,9 +22,17 @@ public class VoteRewardCommand implements CommandExecutor {
         if(sender instanceof Player) {
             Player player = (Player) sender;
             List<String> rwdmsg = plugin.getConfig().getStringList("Messages.voterewardmsg");
+            int votes;
+            if(plugin.jucatori.get(player.getName()) == null){
+                votes = 0;
+            }
+            else{
+                votes = plugin.jucatori.get(player.getName()).getVotes();
+            }
             if(player.hasPermission("dinovote.votereward")) {
                 for (int i = 0; i < rwdmsg.size(); i++) {
-                    String msgcolor = (ChatColor.translateAlternateColorCodes('&', rwdmsg.get(i)));
+                    String msgcolor = (ChatColor.translateAlternateColorCodes('&', rwdmsg.get(i).replace("%votes%", Integer.toString(votes))));
+                    //String msgcolor = (ChatColor.translateAlternateColorCodes('&', rwdmsg.get(i)));
                     player.sendMessage(msgcolor);
                 }
             }

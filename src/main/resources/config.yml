@@ -13,6 +13,8 @@ Settings:
   RemindMessage: false
   #Time in seconds between reminds (reminds are sent only if the player didn't vote in the last 24 hours)
   RemindTime: 300
+  #Enable VoteParty ?
+  VoteParty: false
 MySQL:
   enable: false
   ServerName: 'survival'
@@ -26,6 +28,12 @@ MySQL:
 Commands:
   - 'give %player% diamond 3'
   - 'give %player% iron_ingot 16'
+VoteParty:
+  votesRequired: 50
+  commands:
+    - 'give %player% redstone 64'
+  message:
+    - '&fYou have received the voteparty rewards.'
 Cumulative:
   #At 5 votes, we will run the command bellow (you can set multiple commands, just like in the commands section)
   '5':
@@ -78,6 +86,10 @@ Messages:
   #The message broadcasted to the server when someone votes (you can disable this in the settings section)
   broadcastmessage:
     - '&e%player% &fhas voted the server and received his rewards.'
+    - ''
+    - '&6Type /vote &fto get the vote link if you also want to vote'
+  votepartybroadcast:
+    - '&eThe VoteParty &fhas been executed.'
     - ''
     - '&6Type /vote &fto get the vote link if you also want to vote'
   #The message bellow is sent to the player when he/she votes

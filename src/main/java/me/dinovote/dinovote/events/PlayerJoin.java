@@ -3,8 +3,6 @@ package me.dinovote.dinovote.events;
 import me.dinovote.dinovote.DinoVoteRewards;
 import me.dinovote.dinovote.Jucator;
 import me.dinovote.dinovote.utils.FileStorage;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -90,13 +88,13 @@ public class PlayerJoin implements Listener {
                 plugin.data.setOfflineVotes(player.getName(),plugin.jucatori.get(player.getName()).getOfflineVotes());
             }
             else{
-                if (!FileStorage.getFile().isConfigurationSection(player.getName())) {
-                    FileStorage.getFile().createSection(player.getName());
+                if (!FileStorage.getFile1().isConfigurationSection(player.getName())) {
+                    FileStorage.getFile1().createSection(player.getName());
                 }
 
-                FileStorage.getFile().set(player.getName() + ".votes", plugin.jucatori.get(player.getName()).getVotes());
-                FileStorage.getFile().set(player.getName() + ".offlinevotes", plugin.jucatori.get(player.getName()).getOfflineVotes());
-                FileStorage.saveFile();
+                FileStorage.getFile1().set(player.getName() + ".votes", plugin.jucatori.get(player.getName()).getVotes());
+                FileStorage.getFile1().set(player.getName() + ".offlinevotes", plugin.jucatori.get(player.getName()).getOfflineVotes());
+                FileStorage.saveFiles();
             }
 
 

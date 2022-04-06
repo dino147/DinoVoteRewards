@@ -6,7 +6,7 @@
 
     <groupId>me.dinovote</groupId>
     <artifactId>dinovote</artifactId>
-    <version>0.4.2beta</version>
+    <version>0.4.3beta</version>
     <packaging>jar</packaging>
 
     <name>DinoVoteRewards</name>
